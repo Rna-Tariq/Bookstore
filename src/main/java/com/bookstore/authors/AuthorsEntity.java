@@ -1,8 +1,11 @@
 package com.bookstore.authors;
 
+import com.bookstore.books.BooksEntity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Authors")
@@ -16,6 +19,9 @@ public class AuthorsEntity {
 
     @Column(name = "birthdate")
     private Date birthdate;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BooksEntity> books = new ArrayList<>();
 
     public AuthorsEntity() {
     }

@@ -6,6 +6,7 @@ public class BookReq {
     private String title;
     private Float price;
     private Date publish_date;
+
     private Long author_id;
 
     public String getTitle() {

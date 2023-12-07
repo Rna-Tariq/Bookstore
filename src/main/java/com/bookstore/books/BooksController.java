@@ -56,10 +56,10 @@ public class BooksController {
         return booksRepo.save(book);
     }
 
-    @DeleteMapping("/{bookId}")
-    public ResponseEntity<String> deleteBook(@PathVariable Long bookId, @RequestParam Long authorId) {
-        Optional<BooksEntity> optionalBook = booksRepo.findById(bookId);
-        Optional<AuthorsEntity> optionalAuthor = authorsRepo.findById(authorId);
+    @DeleteMapping("/{book_id}")
+    public ResponseEntity<String> deleteBook(@PathVariable Long book_id, @RequestParam Long author_id) {
+        Optional<BooksEntity> optionalBook = booksRepo.findById(book_id);
+        Optional<AuthorsEntity> optionalAuthor = authorsRepo.findById(author_id);
 
         if (optionalBook.isPresent() && optionalAuthor.isPresent()) {
             BooksEntity book = optionalBook.get();
