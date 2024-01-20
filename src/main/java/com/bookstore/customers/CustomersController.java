@@ -5,17 +5,29 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 @RestController
-@RequestMapping("/Customer")
+@RequestMapping("/customer")
 public class CustomersController {
 
     @Autowired
     private final CustomersRepo customersRepo;
-
-    public CustomersController(CustomersRepo customersRepo) {
+    
+    private final MessageSource messageSource;
+    
+    public CustomersController(CustomersRepo customersRepo, org.springframework.context.MessageSource messageSource) {
         this.customersRepo = customersRepo;
+        this.messageSource = messageSource;
     }
+    
+    @GetMapping
+    public String getPageName() {
+        return messageSource.getMessage("customersPage.message", null, LocaleContextHolder.getLocale());
+    }
+
+
 
     @GetMapping
     public List<CustomersEntity> getAllCustomers() {

@@ -5,17 +5,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 @RestController
-@RequestMapping("/Authors")
+@RequestMapping("/authors")
 public class AuthorsController {
 
     @Autowired
     private AuthorsRepo authorsRepo;
-
-    public AuthorsController(AuthorsRepo authorsRepo) {
-        this.authorsRepo = authorsRepo;
-    }
+    
+//    private final MessageSource messageSource;
+//
+//    public AuthorsController(MessageSource messageSource) {
+//        this.messageSource = messageSource;
+//    }
+//
+//    
+//    @GetMapping
+//    public String getPageName() {
+//        return messageSource.getMessage("authorsPage.message", null, LocaleContextHolder.getLocale());
+//    }
 
     @GetMapping
     public List<AuthorsEntity> findAllAuthors() {
