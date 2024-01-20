@@ -1,6 +1,7 @@
 package com.bookstore.books;
 
-import java.sql.Date;
+import java.util.Date;
+
 public class BookReq {
 
     private String title;

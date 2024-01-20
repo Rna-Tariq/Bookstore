@@ -2,22 +2,25 @@ package com.bookstore.books;
 
 import com.bookstore.authors.AuthorsEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Past;
+import java.util.Date;
 
-import java.sql.Date;
 @Entity
 @Table(name = "Books")
 public class BooksEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "book_id", nullable = false)
-    private Long book_id;
+    private Long id;
     @Column(name = "title")
     private String title;
     @Column(name = "price")
+    @Min(value = 0, message = "Price must be a positive value")
     private Float price;
     @Column(name = "publish_date")
-    @Temporal(TemporalType.DATE)
-    private Date publish_date;
+    @Past(message = "Publish date must be in the past")
+    private Date publishDate;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private AuthorsEntity author;
@@ -26,19 +29,19 @@ public class BooksEntity {
     }
 
     public BooksEntity(Long book_id, String title, Float price, Date publish_date, AuthorsEntity author) {
-        this.book_id = book_id;
+        this.id = book_id;
         this.title = title;
         this.price = price;
-        this.publish_date = publish_date;
+        this.publishDate = publish_date;
         this.author = author;
     }
 
     public Long getBook_id() {
-        return book_id;
+        return id;
     }
 
     public void setBook_id(Long book_id) {
-        this.book_id = book_id;
+        this.id = book_id;
     }
 
     public String getTitle() {
@@ -58,11 +61,11 @@ public class BooksEntity {
     }
 
     public Date getPublish_date() {
-        return publish_date;
+        return publishDate;
     }
 
     public void setPublish_date(Date publish_date) {
-        this.publish_date = publish_date;
+        this.publishDate = publish_date;
     }
 
     public AuthorsEntity getAuthor() {

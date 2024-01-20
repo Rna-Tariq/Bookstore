@@ -2,16 +2,25 @@ package com.bookstore.books;
 
 import com.bookstore.authors.AuthorsEntity;
 import com.bookstore.authors.AuthorsRepo;
+import jakarta.validation.Valid;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
+import java.util.List;
+import java.util.stream.Collectors;
 @RestController
-@RequestMapping("/Books")
+@RequestMapping("/books")
 public class BooksController {
 
     @Autowired
@@ -19,10 +28,40 @@ public class BooksController {
 
     @Autowired
     private AuthorsRepo authorsRepo;
+    
+    @Autowired
+    BooksService booksService;
 
     @GetMapping
-    public List<BooksEntity> getAllBooks() {
-        return booksRepo.findAll();
+    public ResponseEntity<?> searchBooks(
+            @RequestParam(required = false) String authorName,
+            @RequestParam(required = false) Date publish_date,
+            @RequestParam(required = false) String title,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortOrder) {
+
+        Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(sortOrder), sortBy));
+
+
+        Page<BooksEntity> books;
+
+        if (authorName != null) {
+            books = (Page<BooksEntity>) booksService.findBooksByAuthorName(authorName, pageable);
+        } else if (publish_date != null) {
+            books = (Page<BooksEntity>) booksService.findBooksByPublishDate(publish_date, pageable);
+        } else if (title != null) {
+            books = (Page<BooksEntity>) booksService.findBooksByTitle(title, pageable);
+        } else {
+            books = (Page<BooksEntity>) booksService.findAllBooks(pageable);
+        }
+
+        if (books.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Books Found");
+        } else {
+            return ResponseEntity.ok(books);
+        }
     }
 
     @GetMapping("/{id}")
@@ -31,7 +70,26 @@ public class BooksController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addBook(@RequestBody BookReq bookReq) {
+    public ResponseEntity<?> addBook(@Valid @RequestBody BookReq bookReq, BindingResult result) {
+        String regex = "^[a-zA-Z]+$";
+        if (result.hasErrors()) {
+            List<FieldError> fieldErrors = result.getFieldErrors();
+            List<String> errors = fieldErrors.stream()
+                    .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                    .collect(Collectors.toList());
+
+            ValidationErrorResponse errorResponse = new ValidationErrorResponse("Validation errors", errors);
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+        
+        if (!bookReq.getTitle().matches(regex)) {
+            return ResponseEntity.badRequest().body("Book title must be literal a-z/A-Z");
+        }
+
+        if (bookReq.getPrice() < 0) {
+            return ResponseEntity.badRequest().body("Price must be a positive value");
+        }
+
         Optional<AuthorsEntity> optionalAuthor = authorsRepo.findById(bookReq.getAuthor_id());
 
         if (optionalAuthor.isPresent()) {
@@ -50,6 +108,26 @@ public class BooksController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Author not found");
         }
     }
+
+    // Custom response class for validation errors
+    private static class ValidationErrorResponse {
+        private final String message;
+        private final List<String> errors;
+
+        public ValidationErrorResponse(String message, List<String> errors) {
+            this.message = message;
+            this.errors = errors;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public List<String> getErrors() {
+            return errors;
+        }
+    }
+
 
     @PutMapping("/{id}")
     public BooksEntity update(@PathVariable Long id, @RequestBody BooksEntity book) {

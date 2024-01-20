@@ -1,20 +1,21 @@
 package com.bookstore.books;
 
-import com.bookstore.authors.AuthorsEntity;
-import com.bookstore.authors.AuthorsRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Date;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public interface BooksService {
 
-    List<BooksEntity> findAllBooks();
+    Page<BooksEntity> findAllBooks(Pageable pageable);
     Optional<BooksEntity> findById(Long id);
     BooksEntity save(BooksEntity book);
     BooksEntity update(BooksEntity book);
     void deleteBook(Long bookId, Long authorId);
+    
+    Page<BooksEntity> findBooksByAuthorName(String authorName, Pageable pageable);
+    Page<BooksEntity> findBooksByPublishDate(Date publishDate, Pageable pageable);
+    Page<BooksEntity> findBooksByTitle(String title, Pageable pageable);    
 }
