@@ -2,6 +2,8 @@ package com.bookstore.authors;
 
 import com.bookstore.books.BooksEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -15,9 +17,11 @@ public class AuthorsEntity {
     @Column(name = "author_id", nullable = false)
     private Long author_id;
     @Column(name = "name")
+    @NotNull(message = "Please enter a valid value")
     private String name;
-
     @Column(name = "birthdate")
+    @NotNull(message = "Please enter a valid value")
+    @Past(message = "Publish date must be in the past")
     private Date birthdate;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
