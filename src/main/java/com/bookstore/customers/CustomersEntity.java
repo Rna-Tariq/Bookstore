@@ -1,6 +1,8 @@
 package com.bookstore.customers;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 
 import java.sql.Date;
 
@@ -10,13 +12,17 @@ public class CustomersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "customer_id", nullable = false)
+    @NotNull(message = "Please enter a valid value")
     private Long customer_id;
     @Column(name = "name")
+    @NotNull(message = "Please enter a valid value")
     private String name;
     @Column(name = "email")
+    @NotNull(message = "Please enter a valid value")
     private String email;
-
     @Column(name = "join_date")
+    @NotNull(message = "Please enter a valid value")
+    @Past(message = "join_date must be in the past")
     private Date join_date;
 
     public CustomersEntity() {

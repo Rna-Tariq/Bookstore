@@ -1,12 +1,12 @@
 package com.bookstore.customers;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/customer")
@@ -14,20 +14,10 @@ public class CustomersController {
 
     @Autowired
     private final CustomersRepo customersRepo;
-    
-    private final MessageSource messageSource;
-    
-    public CustomersController(CustomersRepo customersRepo, org.springframework.context.MessageSource messageSource) {
+        
+    public CustomersController(CustomersRepo customersRepo) {
         this.customersRepo = customersRepo;
-        this.messageSource = messageSource;
     }
-    
-    @GetMapping
-    public String getPageName() {
-        return messageSource.getMessage("customersPage.message", null, LocaleContextHolder.getLocale());
-    }
-
-
 
     @GetMapping
     public List<CustomersEntity> getAllCustomers() {
@@ -42,6 +32,19 @@ public class CustomersController {
     @PostMapping
     public CustomersEntity save(@RequestBody CustomersEntity customer) {
         return customersRepo.save(customer);
+    }
+    
+    // Extract the error message from the exception and 
+    // Customize the response body with the error message
+    @ControllerAdvice
+    public class GlobalExceptionHandler {
+
+        @ExceptionHandler(ConstraintViolationException.class)
+        @ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST)
+        public ResponseEntity<String> handleValidationException(ConstraintViolationException e) {
+            String errorMessage = e.getMessage();
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
     }
 
     @PutMapping("/{id}")
