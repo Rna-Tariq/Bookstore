@@ -3,6 +3,7 @@ package com.bookstore.books;
 import com.bookstore.authors.AuthorsEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import java.util.Date;
 
@@ -14,12 +15,15 @@ public class BooksEntity {
     @Column(name = "book_id", nullable = false)
     private Long id;
     @Column(name = "title")
+    @NotNull(message = "Please enter a valid value")
     private String title;
     @Column(name = "price")
     @Min(value = 0, message = "Price must be a positive value")
+    @NotNull(message = "Please enter a valid value")
     private Float price;
     @Column(name = "publish_date")
     @Past(message = "Publish date must be in the past")
+    @NotNull(message = "Please enter a valid value")
     private Date publishDate;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")

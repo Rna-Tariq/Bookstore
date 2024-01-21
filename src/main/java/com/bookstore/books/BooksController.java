@@ -2,7 +2,6 @@ package com.bookstore.books;
 
 import com.bookstore.authors.AuthorsEntity;
 import com.bookstore.authors.AuthorsRepo;
-import jakarta.validation.Valid;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,17 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 @RestController
 @RequestMapping("/books")
 public class BooksController {
@@ -34,12 +28,6 @@ public class BooksController {
     @Autowired
     BooksService booksService;
     
-    
-    @GetMapping
-    public String getPageName() {
-        return messageSource.getMessage("booksPage.message", null, LocaleContextHolder.getLocale());
-    }
-
     @GetMapping
     public ResponseEntity<?> searchBooks(
             @RequestParam(required = false) String authorName,
@@ -78,17 +66,8 @@ public class BooksController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addBook(@Valid @RequestBody BookReq bookReq, BindingResult result) {
+    public ResponseEntity<?> addBook(@RequestBody BookReq bookReq) {
         String regex = "^[a-zA-Z]+$";
-        if (result.hasErrors()) {
-            List<FieldError> fieldErrors = result.getFieldErrors();
-            List<String> errors = fieldErrors.stream()
-                    .map(error -> error.getField() + ": " + error.getDefaultMessage())
-                    .collect(Collectors.toList());
-
-            ValidationErrorResponse errorResponse = new ValidationErrorResponse("Validation errors", errors);
-            return ResponseEntity.badRequest().body(errorResponse);
-        }
         
         if (!bookReq.getTitle().matches(regex)) {
             return ResponseEntity.badRequest().body("Book title must be literal a-z/A-Z");
@@ -99,7 +78,7 @@ public class BooksController {
         }
 
         Optional<AuthorsEntity> optionalAuthor = authorsRepo.findById(bookReq.getAuthor_id());
-
+        
         if (optionalAuthor.isPresent()) {
             AuthorsEntity author = optionalAuthor.get();
 
@@ -116,26 +95,18 @@ public class BooksController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Author not found");
         }
     }
-
-    // Custom response class for validation errors
-    private static class ValidationErrorResponse {
-        private final String message;
-        private final List<String> errors;
-
-        public ValidationErrorResponse(String message, List<String> errors) {
-            this.message = message;
-            this.errors = errors;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public List<String> getErrors() {
-            return errors;
-        }
-    }
-
+    
+    // Extract the error message from the exception and 
+    // Customize the response body with the error message
+//    @ControllerAdvice
+//    public class GlobalExceptionHandler {
+//        @ExceptionHandler(ConstraintViolationException.class)
+//        @ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST)
+//        public ResponseEntity<String> handleValidationException(ConstraintViolationException e) {
+//            String errorMessage = e.getMessage();
+//            return ResponseEntity.badRequest().body(errorMessage);
+//        }
+//    }
 
     @PutMapping("/{id}")
     public BooksEntity update(@PathVariable Long id, @RequestBody BooksEntity book) {
