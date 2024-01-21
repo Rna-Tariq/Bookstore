@@ -21,7 +21,7 @@ public class AuthorsEntity {
     private String name;
     @Column(name = "birthdate")
     @NotNull(message = "Please enter a valid value")
-    @Past(message = "Publish date must be in the past")
+    @Past(message = "birthdate must be in the past")
     private Date birthdate;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
