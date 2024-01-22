@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity
@@ -15,6 +16,7 @@ public class BooksEntity {
     @Column(name = "book_id", nullable = false)
     private Long id;
     @Column(name = "title")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Book title must contain only literal characters (a-z, A-Z)")
     @NotNull(message = "Please enter a valid value")
     private String title;
     @Column(name = "price")

@@ -2,6 +2,7 @@ package com.bookstore.books;
 
 import com.bookstore.authors.AuthorsEntity;
 import com.bookstore.authors.AuthorsRepo;
+import jakarta.validation.ConstraintViolationException;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -76,15 +77,15 @@ public class BooksController {
 
     @PostMapping
     public ResponseEntity<?> addBook(@RequestBody BookReq bookReq) {
-        String regex = "^[a-zA-Z]+$";
+//        String regex = "^[a-zA-Z]+$";
         
-        if (!bookReq.getTitle().matches(regex)) {
-            return ResponseEntity.badRequest().body("Book title must be literal a-z/A-Z");
-        }
+//        if (!bookReq.getTitle().matches(regex)) {
+//            return ResponseEntity.badRequest().body("Book title must be literal a-z/A-Z");
+//        }
 
-        if (bookReq.getPrice() < 0) {
-            return ResponseEntity.badRequest().body("Price must be a positive value");
-        }
+//        if (bookReq.getPrice() < 0) {
+//            return ResponseEntity.badRequest().body("Price must be a positive value");
+//        }
 
         Optional<AuthorsEntity> optionalAuthor = authorsRepo.findById(bookReq.getAuthor_id());
         
@@ -105,17 +106,17 @@ public class BooksController {
         }
     }
     
-    // Extract the error message from the exception and 
-    // Customize the response body with the error message
-//    @ControllerAdvice
-//    public class GlobalExceptionHandler {
-//        @ExceptionHandler(ConstraintViolationException.class)
-//        @ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST)
-//        public ResponseEntity<String> handleValidationException(ConstraintViolationException e) {
-//            String errorMessage = e.getMessage();
-//            return ResponseEntity.badRequest().body(errorMessage);
-//        }
-//    }
+//     Extract the error message from the exception and 
+//     Customize the response body with the error message
+    @ControllerAdvice
+    public class GlobalExceptionHandler {
+        @ExceptionHandler(ConstraintViolationException.class)
+        @ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST)
+        public ResponseEntity<String> handleValidationException(ConstraintViolationException e) {
+            String errorMessage = e.getMessage();
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+    }
 
     @PutMapping("/{id}")
     public BooksEntity update(@PathVariable Long id, @RequestBody BooksEntity book) {
