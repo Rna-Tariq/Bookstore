@@ -77,15 +77,6 @@ public class BooksController {
 
     @PostMapping
     public ResponseEntity<?> addBook(@RequestBody BookReq bookReq) {
-//        String regex = "^[a-zA-Z]+$";
-        
-//        if (!bookReq.getTitle().matches(regex)) {
-//            return ResponseEntity.badRequest().body("Book title must be literal a-z/A-Z");
-//        }
-
-//        if (bookReq.getPrice() < 0) {
-//            return ResponseEntity.badRequest().body("Price must be a positive value");
-//        }
 
         Optional<AuthorsEntity> optionalAuthor = authorsRepo.findById(bookReq.getAuthor_id());
         
