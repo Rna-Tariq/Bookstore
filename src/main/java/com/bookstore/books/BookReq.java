@@ -1,12 +1,13 @@
 package com.bookstore.books;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 public class BookReq {
 
     private String title;
     private Float price;
-    private Date publish_date;
+    private Date publishDate;
 
     private Long author_id;
 
@@ -26,12 +27,12 @@ public class BookReq {
         this.price = price;
     }
 
-    public Date getPublish_date() {
-        return publish_date;
+    public Date getPublishDate() {
+        return publishDate;
     }
 
-    public void setPublish_date(Date publish_date) {
-        this.publish_date = publish_date;
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
     }
 
     public Long getAuthor_id() {

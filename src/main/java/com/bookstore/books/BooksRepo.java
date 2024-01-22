@@ -1,6 +1,6 @@
 package com.bookstore.books;
 
-import java.util.Date;
+import java.sql.Date;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

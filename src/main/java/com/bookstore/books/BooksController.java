@@ -3,7 +3,7 @@ package com.bookstore.books;
 import com.bookstore.authors.AuthorsEntity;
 import com.bookstore.authors.AuthorsRepo;
 import jakarta.validation.ConstraintViolationException;
-import java.util.Date;
+import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +41,7 @@ public class BooksController {
     @GetMapping
     public ResponseEntity<?> searchBooks(
             @RequestParam(required = false) String authorName,
-            @RequestParam(required = false) Date publish_date,
+            @RequestParam(required = false) Date publishDate,
             @RequestParam(required = false) String title,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -55,8 +55,8 @@ public class BooksController {
 
         if (authorName != null) {
             books = (Page<BooksEntity>) booksService.findBooksByAuthorName(authorName, pageable);
-        } else if (publish_date != null) {
-            books = (Page<BooksEntity>) booksService.findBooksByPublishDate(publish_date, pageable);
+        } else if (publishDate != null) {
+            books = (Page<BooksEntity>) booksService.findBooksByPublishDate(publishDate, pageable);
         } else if (title != null) {
             books = (Page<BooksEntity>) booksService.findBooksByTitle(title, pageable);
         } else {
@@ -86,7 +86,7 @@ public class BooksController {
             BooksEntity book = new BooksEntity();
             book.setTitle(bookReq.getTitle());
             book.setPrice(bookReq.getPrice());
-            book.setPublish_date(bookReq.getPublish_date());
+            book.setPublishDate(bookReq.getPublishDate());
             book.setAuthor(author);
 
             booksRepo.save(book);

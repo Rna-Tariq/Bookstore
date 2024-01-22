@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "Books")
@@ -23,7 +23,7 @@ public class BooksEntity {
     @Min(value = 0, message = "Price must be a positive value")
     @NotNull(message = "Please enter a valid value")
     private Float price;
-    @Column(name = "publish_date")
+    @Column(name = "publishDate")
     @Past(message = "Publish date must be in the past")
     @NotNull(message = "Please enter a valid value")
     private Date publishDate;
@@ -34,11 +34,11 @@ public class BooksEntity {
     public BooksEntity() {
     }
 
-    public BooksEntity(Long book_id, String title, Float price, Date publish_date, AuthorsEntity author) {
+    public BooksEntity(Long book_id, String title, Float price, Date publishDate, AuthorsEntity author) {
         this.id = book_id;
         this.title = title;
         this.price = price;
-        this.publishDate = publish_date;
+        this.publishDate = publishDate;
         this.author = author;
     }
 
@@ -66,12 +66,12 @@ public class BooksEntity {
         this.price = price;
     }
 
-    public Date getPublish_date() {
+    public Date getPublishDate() {
         return publishDate;
     }
 
-    public void setPublish_date(Date publish_date) {
-        this.publishDate = publish_date;
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
     }
 
     public AuthorsEntity getAuthor() {
