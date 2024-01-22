@@ -5,41 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e8dfe28-7a58-49b6-8033-d90bb8f2f2b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/resourceBundles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/GreetingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/LanguageConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/MessageConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/MyLoaleResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/books/DataValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/messages_Deutsch.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/messages_en.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/messages_fr.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/bookstore/BooksRepoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/resourceBundles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/BookstoreApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/BookstoreApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/authors/AuthorsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/authors/AuthorsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BookReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BookReq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/GreetingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/GreetingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/LanguageConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/LanguageConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/MessageConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/MessageConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/MyLocaleResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/MyLocaleResolver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/books/BooksService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/customers/CustomersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/customers/CustomersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bookstore/customers/CustomersEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bookstore/customers/CustomersEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/BookstoreApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/BookstoreApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/authors/AuthorsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/authors/AuthorsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/books/BookReq.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/books/BookReq.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/books/BooksService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/customers/CustomersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/customers/CustomersController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bookstore/customers/CustomersEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bookstore/customers/CustomersEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages_Deutsch.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ResourceBundle/messages_gr.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ResourceBundle/messages.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ResourceBundle/messages_fr.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +55,6 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;/Users/osx/Bookstore/src/test/java&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/osx/Bookstore&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.idesettings.debugger.capture&quot;
@@ -84,6 +62,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/ResourceBundle" />
       <recent name="$PROJECT_DIR$/src/main/java/com/bookstore" />
     </key>
   </component>

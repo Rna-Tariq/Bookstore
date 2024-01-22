@@ -6,15 +6,25 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 public class CustomersController {
 
     @Autowired
     private final CustomersRepo customersRepo;
-        
+    
+    @Autowired
+    MessageSource messageSource;
+    
+    @GetMapping("/customersPageName")
+    public String greeting() {
+        return messageSource.getMessage("customersPageName", null, LocaleContextHolder.getLocale());
+    }
+  
     public CustomersController(CustomersRepo customersRepo) {
         this.customersRepo = customersRepo;
     }

@@ -7,12 +7,18 @@ package com.bookstore;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-
+import org.springframework.context.annotation.Configuration;
 /**
  *
  * @author osx
  */
+
+@Configuration
 public class LanguageConfig {
+
+    /**
+     *
+     */
     public static final List<Locale> Locales = Arrays.asList(
             new Locale("en"),
             new Locale("fr"),

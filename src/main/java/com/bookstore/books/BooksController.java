@@ -9,7 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +28,14 @@ public class BooksController {
     
     @Autowired
     BooksService booksService;
+    
+    @Autowired
+    MessageSource messageSource;
+    
+    @GetMapping("/booksPageName")
+    public String greeting() {
+        return messageSource.getMessage("booksPageName", null, LocaleContextHolder.getLocale());
+    }
     
     @GetMapping
     public ResponseEntity<?> searchBooks(
