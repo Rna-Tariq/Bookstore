@@ -1,7 +1,6 @@
 Bookstore Application
 
 Overview
-
 The Bookstore Application is a Spring Boot-based web application for managing books, authors, and orders. It provides functionalities such as book listing, adding books, searching, and handling customer orders.
 
 Features
