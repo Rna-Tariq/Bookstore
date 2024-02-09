@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/customer")
 public class CustomersController {
 
     @Autowired
@@ -20,6 +21,9 @@ public class CustomersController {
     @Autowired
     MessageSource messageSource;
     
+    @Autowired
+    private EmailService emailService;
+
     @GetMapping("/customersPageName")
     public String greeting() {
         return messageSource.getMessage("customersPageName", null, LocaleContextHolder.getLocale());
@@ -39,6 +43,14 @@ public class CustomersController {
         return customersRepo.findById(id);
     }
 
+    @GetMapping("/sendEmail")
+    public ResponseEntity<String> sendAsyncEmail() {
+        // Invoke the asynchronous email sending method
+        CompletableFuture<Void> future = emailService.sendEmail("recipient@example.com", "Async Subject", "Async Body");
+
+        return ResponseEntity.ok("Email sending initiated");
+    }
+    
     @PostMapping
     public CustomersEntity save(@RequestBody CustomersEntity customer) {
         return customersRepo.save(customer);
