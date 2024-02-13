@@ -39,4 +39,4 @@ Database: The application uses an embedded H2 database by default. You can confi
 
 ## Contributions are welcome! Feel free to open issues or submit pull requests
 
-## P.S. Project is still under process
+## P.S. Project is still under processing
